@@ -1,0 +1,4 @@
+city,project_folder,landsat_scene_manifest,dataset_catalogue,era5_request_metadata,era5_overpass_matches,cpcb_overpass_matches,phase2_scene_metrics,phase2_metadata,phase2_grid_hotspot_ranking,phase3_native_metrics,phase3_native_drivers,phase4_metrics,phase5_scenarios,phase6_summary,phase6_ward_allocation,ward_heat_priority,all_comparison_inputs_present
+Ahmedabad,Urban_Heat_Mitigation,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Chennai,Urban_Heat_Mitigation_Chennai,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True
+Nagpur,Urban_Heat_Mitigation_Nagpur,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True

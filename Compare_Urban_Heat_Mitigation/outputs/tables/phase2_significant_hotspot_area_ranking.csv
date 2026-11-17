@@ -1,0 +1,4 @@
+city,significant_hotspot_area_km2,significant_hotspot_cells,definition,rank
+Ahmedabad,117.32129492762033,130677,Sum of grid-cell area where Gi* hot-cluster flag=1 and FDR q<=0.05,1
+Chennai,110.38229810388293,122647,Sum of grid-cell area where Gi* hot-cluster flag=1 and FDR q<=0.05,2
+Nagpur,51.799499110202305,57555,Sum of grid-cell area where Gi* hot-cluster flag=1 and FDR q<=0.05,3

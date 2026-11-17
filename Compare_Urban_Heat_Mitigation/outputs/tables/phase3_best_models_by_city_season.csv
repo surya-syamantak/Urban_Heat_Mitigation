@@ -1,0 +1,7 @@
+city,season,best_model,spatial_cv_RMSE_C,spatial_cv_R2,selection_metric
+Ahmedabad,hot,Random Forest (scikit-learn),1.4028953954014824,0.6753658999499497,lowest spatial-CV RMSE within city and season
+Ahmedabad,cool,CatBoost,0.9527888601258482,0.5929462283602911,lowest spatial-CV RMSE within city and season
+Chennai,hot,Random Forest (scikit-learn),1.5346776317926016,0.6372708138656042,lowest spatial-CV RMSE within city and season
+Chennai,cool,CatBoost,1.2965443600046747,0.5554178003994521,lowest spatial-CV RMSE within city and season
+Nagpur,hot,Random Forest (scikit-learn),1.284943206005383,0.6992970261446335,lowest spatial-CV RMSE within city and season
+Nagpur,cool,Random Forest (scikit-learn),1.0360272051226351,0.6302042289040425,lowest spatial-CV RMSE within city and season

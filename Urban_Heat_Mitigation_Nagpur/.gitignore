@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local credentials and temporary artifacts
+.cdsapirc
+*.token
+tmp/
+
+# GIS sidecars, temporary layers, and QGIS backups
+*.gpkg-shm
+*.gpkg-wal
+*.qgz~
+*.qgs~
+*.aux.xml
+*.ovr
+
+# Keep source data out of Git; version the catalogue, scripts, and derived
+# deliverables selectively.
+data/raw/**
+data/external/**
+data/processed/**
+!data/processed/PHASE1_QA.md
+!data/dataset_audit.csv
+outputs/**

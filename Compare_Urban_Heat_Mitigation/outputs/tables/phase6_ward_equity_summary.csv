@@ -1,0 +1,4 @@
+city,wards_in_heat_ranking,priority_group_definition,priority_wards,priority_group_share_of_high_heat_population,priority_group_share_of_optimized_benefit,priority_group_share_of_selected_cells,optimized_benefit_total_person_C,selected_cells_total
+Ahmedabad,48,Top 20% of wards by population in high/very-high heat cells,10,0.4474218830762991,0.28940307204721827,0.22616984402079723,100991.9059889932,1154
+Chennai,200,Top 20% of wards by population in high/very-high heat cells,40,0.44301920820236695,0.3112974871056681,0.24454743729552889,107759.24622438838,3668
+Nagpur,38,Top 20% of wards by population in high/very-high heat cells,8,0.37908623695915583,0.29448951586601996,0.24857954545454544,72843.74537636168,704
