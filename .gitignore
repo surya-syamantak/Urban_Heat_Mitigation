@@ -1,1 +1,18 @@
 Urban_Heat_Mitigation_Chennai/.venv312/
+# Python virtual environments
+**/.venv/
+**/venv/
+**/.venv312/
+
+# Python cache
+**/__pycache__/
+*.py[cod]
+
+# Temporary files
+*.token
+*.gpkg-shm
+*.gpkg-wal
+*.qgz~
+*.qgs~
+*.aux.xml
+*.ovr
