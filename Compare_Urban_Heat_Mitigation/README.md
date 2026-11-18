@@ -2,7 +2,7 @@
 
 This folder contains a reusable script that compares existing outputs from:
 
-- `Urban_Heat_Mitigation` (Ahmedabad)
+- `Urban_Heat_Mitigation_Ahmedabad`
 - `Urban_Heat_Mitigation_Chennai`
 - `Urban_Heat_Mitigation_Nagpur`
 
