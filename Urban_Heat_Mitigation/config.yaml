@@ -1,0 +1,124 @@
+project:
+  name: Urban Heat Mitigation - Ahmedabad
+  city: Ahmedabad
+  state: Gujarat
+  country: India
+  random_seed: 42
+
+study:
+  # Use every Landsat 8/9 scene meeting the shared cloud and QA rules in these
+  # multi-year hot/cool-season windows; records retain acquisition year/date.
+  start_date: "2021-01-01"
+  end_date: "2025-12-31"
+  seasons:
+    hot:
+      months: [3, 4, 5]
+      label: "Hot pre-monsoon (March-May)"
+    cool:
+      months: [12, 1, 2]
+      label: "Cool winter (December-February)"
+  landsat_max_cloud_cover_percent: 60
+  landsat_stac_collection: landsat-c2-l2
+  # Populated only for manually pinned acquisitions. Normally left empty so the
+  # collector discovers the lowest-cloud Landsat 8/9 items through STAC.
+  landsat_items: []
+
+spatial:
+  crs: EPSG:32643
+  resolution_m: 30
+  grid: data/processed/Ahmedabad_Grid_30m_Clipped.gpkg
+  wards: data/processed/Ahmedabad_Wards_UTM43N_area.gpkg
+  centroid_ward_table: data/processed/Ahmedabad_Grid_30m_Centroids_Ward_v3.gpkg
+
+paths:
+  raw: data/raw
+  processed: data/processed
+  external: data/external
+
+landsat:
+  wrs_path: 148
+  wrs_rows: [44]
+  stac_api: https://planetarycomputer.microsoft.com/api/stac/v1
+  sas_api: https://planetarycomputer.microsoft.com/api/sas/v1/token/landsateuwest/landsat-c2
+  qa_pixel_reject_bits: [0, 1, 2, 3, 4, 5]
+  surface_temperature_scale: 0.00341802
+  surface_temperature_offset_kelvin: 149.0
+  reflectance_scale: 0.0000275
+  reflectance_offset: -0.2
+  st_qa_scale_kelvin: 0.01
+  st_qa_cutoff_kelvin: null
+
+era5:
+  provider: Open-Meteo Historical Weather API (ERA5)
+  endpoint: https://archive-api.open-meteo.com/v1/archive
+  model: era5
+  latitude: 23.02
+  longitude: 72.58
+  timezone: UTC
+  hourly_variables:
+    - temperature_2m
+    - relative_humidity_2m
+    - dew_point_2m
+    - wind_speed_10m
+    - wind_direction_10m
+    - shortwave_radiation
+    - direct_radiation
+    - diffuse_radiation
+
+cpcb:
+  source: https://app.cpcbccr.com/ccr_docs/caaqms_list_All_India.pdf
+  file_path_endpoint: https://airquality.cpcb.gov.in/caaqms-common/dataRepository/file-path
+  download_endpoint: https://airquality.cpcb.gov.in/caaqms-common/dataRepository/download-excel-file
+  city: Ahmedabad
+  timestamp_timezone: Asia/Kolkata
+  stations:
+    - {site_code: site_308, station: "Maninagar, Ahmedabad - GPCB", latitude: 23.002657, longitude: 72.591912}
+    - {site_code: site_5449, station: "Sardar Vallabhbhai Patel Stadium, Ahmedabad - IITM", latitude: 23.043070, longitude: 72.562968}
+    - {site_code: site_5450, station: "Gyaspur, Ahmedabad - IITM", latitude: 22.977134, longitude: 72.553024}
+    - {site_code: site_5451, station: "Rakhial, Ahmedabad - IITM", latitude: 23.016834, longitude: 72.625775}
+    - {site_code: site_5452, station: "Raikhad, Ahmedabad - IITM", latitude: 23.020509, longitude: 72.579261}
+    - {site_code: site_5453, station: "Chandkheda, Ahmedabad - IITM", latitude: 23.107969, longitude: 72.574648}
+    - {site_code: site_5454, station: "SAC ISRO Bopal, Ahmedabad - IITM", latitude: 23.041137, longitude: 72.456691}
+    - {site_code: site_5455, station: "SAC ISRO Satellite, Ahmedabad - IITM", latitude: 23.023389, longitude: 72.515201}
+    - {site_code: site_5456, station: "SVPI Airport Hansol, Ahmedabad - IITM", latitude: 23.076793, longitude: 72.627874}
+  frequency: 1Hr
+
+osm:
+  endpoint: https://overpass-api.de/api/interpreter
+  bbox: [22.90, 72.40, 23.17, 72.73] # south, west, north, east; covers the ward AOI
+  snapshot_note: current OSM snapshot; historical 2023 extract not available from this endpoint
+
+population:
+  source: Global Human Settlement Layer GHS-POP R2023A
+  epoch: 2020
+  resolution_m: 100
+  crs: ESRI:54009
+  unit: estimated persons per 100 m cell
+  tile_id: R7_C25
+  tile_index_path: data/external/GHSL_tile_index/GHSL2_0_MWD_L1_tile_schema_land.shp
+  download_url: https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2020_GLOBE_R2023A_54009_100/V1-0/tiles/GHS_POP_E2020_GLOBE_R2023A_54009_100_V1_0_R7_C25.zip
+  archive_path: data/external/GHS_POP_E2020_R2023A_54009_100_R7_C25.zip
+  raster_path: data/external/GHSL_population_2020/GHS_POP_E2020_GLOBE_R2023A_54009_100_V1_0_R7_C25.tif
+  nodata: -200
+  resampling_for_density_alignment: bilinear
+
+phase2:
+  heat_index_source: CPCB Ahmedabad station AT/RH, with matched ERA5 fallback where fewer than three station pairs are available
+  heat_index_method: NOAA Rothfusz regression with low-heat-index formula
+  heat_index_idw_neighbors: 4
+  heat_index_idw_power: 2
+  hazard_weights:
+    lst_anomaly_percentile: 0.5
+    heat_index_percentile: 0.5
+  exposure_method: heat hazard percentile multiplied by population-density percentile
+  cluster_method: Getis-Ord Gi-star
+  cluster_neighborhood: queen contiguity, 3x3 cells including focal cell
+  cluster_fdr_q: 0.05
+  severity_method: city-relative quintiles of hot-season heat-stress index
+  persistence_threshold: per-scene AOI hottest LST decile
+  persistence_period: all selected multi-year hot/cool Landsat observations
+
+runtime:
+  # Override with QGIS Python launcher path on this machine, for example:
+  # C:\\Program Files\\QGIS 3.44.15\\bin\\python-qgis-ltr.bat
+  qgis_python: ""
