@@ -6,7 +6,7 @@ This report summarizes outputs already present in the three project folders. It 
 
 | City | Project folder | Study period | Unique Landsat dates | Item/tile records | Grid cells | Wards | Cell size (m) | ERA5 hours | CPCB match rows | Phase 2 scenes with CPCB support |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Ahmedabad | `Urban_Heat_Mitigation` | 2021-01-01 to 2025-12-31 | 88 | 88 | 492386 | 48 | 30 | 43824 | 369 | 41 |
+| Ahmedabad | `Urban_Heat_Mitigation_Ahmedabad` | 2021-01-01 to 2025-12-31 | 88 | 88 | 492386 | 48 | 30 | 43824 | 369 | 41 |
 | Chennai | `Urban_Heat_Mitigation_Chennai` | 2021-01-01 to 2025-12-31 | 80 | 80 | 483211 | 200 | 30 | 43824 | 0 | 0 |
 | Nagpur | `Urban_Heat_Mitigation_Nagpur` | 2021-01-01 to 2025-12-31 | 83 | 160 | 234587 | 38 | 30 | 43824 | 0 | 0 |
 
